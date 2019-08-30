@@ -38,23 +38,23 @@
 
     $conn = mysqli_connect($servername, $username, $password, $db);
     if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+        die("접속 실패: " . mysqli_connect_error() . '<hr><p>관리자에게 문의하세요</p>');
     }
-    $query="update sls set user='$a' where id=1";
+    $query = "UPDATE `sls` SET `user` = '{$user}' WHERE `id` = 1";
+    echo $query;
     if (mysqli_query($conn, $query)) {
-        echo "현재 대여 가능한 노트북"."<br>";
+        echo '현재 대여 가능한 노트북'.'<br>';
     } else {
-        echo "Error updating record: " . mysqli_error($conn);
+        echo 'Error updating record: ' . mysqli_error($conn);
     }
 
-    // 사용 중이 아닌 노트북 리스트 호출
-
+    // 사용 중이 아닌 노트북 리스트 호출'
     echo '<table>';
     $query = 'SELECT `id` FROM `sls` WHERE `c1` = 0';
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>" . "<td> <button class=\"btn \" id=\"".$row["id"]."\">" . $row["id"] . "</button></td>";
+            echo '<tr>' . '<td> <button class="btn" id="' . $row['id'] . '">' . $row['id'] . '</button></td>';
         }
     }
     echo '</table>'
@@ -66,9 +66,9 @@
             $('.btn').click(function() {
                 count = count + 1;
                 if (count % 2 == 0) {
-                    $(this).css('background-color','white');
+                    $(this).css('background-color', 'white');
                 } else {
-                    $(this).css('background-color','#5CD1E5');
+                    $(this).css('background-color', '#5CD1E5');
                 }
             });
          });
