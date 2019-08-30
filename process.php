@@ -28,11 +28,13 @@
 <body>
 
 <?php
+    // MySQL 서버 접속
+
     $user = $_POST['user']; 
     $servername = 'localhost';
     $username = 'root';
     $password = '111111';
-    $db = 'sls';
+    $db = 'id10675326_suninsls';
 
     $conn = mysqli_connect($servername, $username, $password, $db);
     if (!$conn) {
@@ -45,30 +47,29 @@
         echo "Error updating record: " . mysqli_error($conn);
     }
 
+    // 사용 중이 아닌 노트북 리스트 호출
 
-
-
-
-
-    // 사용중이 아닌 노트북 리스트 호출
     echo '<table>';
-    $query="select id from sls where c1=0";
-    $result=mysqli_query($conn, $query);
+    $query = 'SELECT `id` FROM `sls` WHERE `c1` = 0';
+    $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)){
-            echo "<tr>" . "<td> <button class=\"btn \" id=\"".$row["id"]."\">" . $row["id"] . "</button></td>"; // <button id=1>
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>" . "<td> <button class=\"btn \" id=\"".$row["id"]."\">" . $row["id"] . "</button></td>";
         }
     }
     echo '</table>'
     ?>
+
     <script>
         var count = 0;
-         $(document).ready(function(){
-            $(".btn").click(function(){
+        $(document).ready(function() {
+            $('.btn').click(function() {
                 count = count + 1;
-                if (count % 2 == 0){
-                    $(this).css('background-color','white');}
-                else {$(this).css('background-color','#5CD1E5');}
+                if (count % 2 == 0) {
+                    $(this).css('background-color','white');
+                } else {
+                    $(this).css('background-color','#5CD1E5');
+                }
             });
          });
     </script>
