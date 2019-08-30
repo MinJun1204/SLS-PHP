@@ -1,39 +1,40 @@
 <html> 
-    <title>
-        출력창
-    </title>
-    <head>
-       <style>
-            tr {
-              width: 100%;
-              height: 10rem;
-            }
-       
-            table {
-              width: 100%;
-              border-collapse: collapse;
-            }
-           td {
-               border:solid 1.5px black;
-               padding: 20px;
-               width: 50%;
-               font-size: 2rem; /* 1rem = 16px */
-           }
-           button {
-               background-color: white;
-           }
-       </style> 
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    </head>
-    <body>
-<?php
-    $a=$_POST['user']; 
-    $server="localhost";
-    $user="root";
-    $pw ="asdfasdf";
-    $db="sls";
+<title>선인고 노트북 관리 시스템</title>
+<head>
+    <style>
+        tr {
+            width: 100%;
+            height: 10rem;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    $conn = mysqli_connect($server, $user, $pw, $db);
+        td {
+            border: solid 1px black;
+            padding: 20px;
+            width: 50%;
+            font-size: 2rem;        /* 1rem = 16px */
+        }
+
+        button {
+            background-color: white;
+        }
+    </style> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+<?php
+    $user = $_POST['user']; 
+    $servername = 'localhost';
+    $username = 'root';
+    $password = '111111';
+    $db = 'sls';
+
+    $conn = mysqli_connect($servername, $username, $password, $db);
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }

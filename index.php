@@ -1,9 +1,3 @@
-<?php
-
-// abc
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
