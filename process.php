@@ -41,7 +41,6 @@
         die("접속 실패: " . mysqli_connect_error() . '<hr><p>관리자에게 문의하세요</p>');
     }
     $query = "UPDATE `sls` SET `user` = '{$user}' WHERE `id` = 1";
-    echo $query;
     if (mysqli_query($conn, $query)) {
         echo '현재 대여 가능한 노트북'.'<br>';
     } else {
@@ -49,6 +48,7 @@
     }
 
     // 사용 중이 아닌 노트북 리스트 호출'
+
     echo '<table>';
     $query = 'SELECT `id` FROM `sls` WHERE `c1` = 0';
     $result = mysqli_query($conn, $query);
