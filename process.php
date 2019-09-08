@@ -38,7 +38,7 @@
 
     $conn = mysqli_connect($servername, $username, $password, $db);
     if (!$conn) {
-        die("접속 실패: " . mysqli_connect_error() . '<hr><p>관리자에게 문의하세요</p>');
+        die("데이터베이스 접속 실패: " . mysqli_connect_error() . '<hr><h1>관리자에게 문의하세요</h1>');
     }
     $query = "UPDATE `sls` SET `user` = '{$user}' WHERE `id` = 1";
     if (mysqli_query($conn, $query)) {
