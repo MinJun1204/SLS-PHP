@@ -25,7 +25,7 @@
         
         
         input[type="checkbox"] {
-            /* display: none; */
+            display: none;
         }
 
         .cspan {
@@ -77,7 +77,7 @@
             $i ++;
             echo '<input type="checkbox" name="laptop[]" value="' . $i . '" id="c' . $i . '">';
             echo '<label for="c' . $i . '">';
-            echo '<span class="cspan" id="s' . $i . '">' . $i . '</span>';
+            echo '<span class="cspan">' . $i . '</span>';
             echo '</label>';
         #    echo '<tr>' . '<td> <button class="btn" id="' . $row['id'] . '">' . $row['id'] . '</button></td>';
         }
@@ -89,8 +89,7 @@
     </form>
     <script>
         $(document).ready(function() {
-            $('.btn, .cspan').click(function(event) {
-                event.preventDefault();
+            $('.cspan').click(function(event) {
                 $(this).toggleClass('blue');
             });
          });
