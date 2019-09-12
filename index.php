@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title></title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>선인고 노트북 관리 시스템</title>
     
     <link rel="stylesheet" href="./src/css/style.css">
     
@@ -12,7 +14,7 @@
     <script>
         $(document).ready(function() {
             $('#booking, #using').click(function() {
-                location.href = './process.php';
+                location.href = './lend.php';
             });
             
             $('#return').click(function() {
@@ -20,15 +22,33 @@
             });
         })
     </script>
+
+    <style>
+        #version {
+             margin-top: 35%;
+
+        }
+        footer {
+            color: aquamarine;
+            font-size: 1.2rem;
+        }
+
+        input[type="text"] {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h1>선인고 노트북 관리 시스템</h1>
 
     <form action="./process.php" method="post"> 
-        <input type="text" name="user">
-        <input type="submit">    
+        <input type="text" name="user" placeholder="이름">
+        <br>
+        <input type="submit" name="todo" value="대여">
+        <input type="submit" name="todo" value="반납">
     </form>
-    
+   
+    <!--
     <span id="time">
         <select id="select1">
             <optgroup label="사용 시간">
@@ -56,11 +76,26 @@
         </select>
         <span>까지</span>
     </span>
+    -->
     
-    <span id="process">
+    <!-- <span id="process">
         <button id="booking">예약</button>
         <button id="using">사용</button>
     <button id="return">반납</button>
-    </span>
+    </span> -->
+
+    <footer>
+        <p id="version">SLS Aquamarine<br>Build 56401</p>
+    </footer>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+</head>
+<body>
+    
 </body>
 </html>
