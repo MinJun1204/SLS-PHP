@@ -1,11 +1,11 @@
 <?php
 
-$user = $_POST['user'];
+$GLOBALS['user'] = $_POST['user'];
 
 function lend() {           // 사용 중이 아닌 노트북 리스트 출력'
     include './connect.php';
-    
-    echo '현재 대여 가능한 노트북' . '<br>';
+
+    echo '대여 가능한 노트북' . '<br>';
     $query = 'SELECT `id`, `c1` FROM `sls`';
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
@@ -22,14 +22,13 @@ function lend() {           // 사용 중이 아닌 노트북 리스트 출력'
             echo '</label>';
         }
     }
-    echo '<input type="submit" name="todo" value="대여">';
+    echo '<br><input type="submit" name="todo" value="대여">';
 }
 
 function turnIn() {         // 대여된 노트북 리스트 출력'
     include './connect.php';
-    global $user;
 
-    echo '노트북 목록' . '<br>';
+    echo '대여한 노트북 목록' . '<br>';
     $query = 'SELECT `id`, `c1`, `user` FROM `sls`';
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
@@ -38,7 +37,7 @@ function turnIn() {         // 대여된 노트북 리스트 출력'
             $i ++;
             echo '<input type="checkbox" name="laptop[]" value="' . $i . '" id="c' . $i . '">';
             echo '<label for="c' . $i . '">';
-            if ($row['user'] != $user) {
+            if ($row['user'] != $GLOBALS['user']) {
                 echo '<span class="cspan disabled">' . $i . '</span>';
             } else {
                 echo '<span class="cspan">' . $i . '</span>';
@@ -46,7 +45,7 @@ function turnIn() {         // 대여된 노트북 리스트 출력'
             echo '</label>';
         }
     }
-    echo '<input type="submit" name="todo" value="반납">';
+    echo '<br><input type="submit" name="todo" value="반납">';
 }
 
 ?>
@@ -58,56 +57,11 @@ function turnIn() {         // 대여된 노트북 리스트 출력'
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>선인고 노트북 관리 시스템</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <style>
-        tr {
-            width: 100%;
-            height: 10rem;
-        }
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="./src/css/style.css">
     
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        td {
-            border: solid 1px black;
-            padding: 20px;
-            width: 50%;
-            font-size: 2rem;        /* 1rem = 16px */
-        }
-        button {
-            background-color: white;
-        }
-        
-        
-        input[type="checkbox"] {
-            display: none;
-        }
-        .cspan {
-            display: inline-block;
-            text-align: center;
-            width: 30px;
-            height: 30px;
-            background-color: #DDD;
-            margin: 5px;    
-        }
-        .blue {
-            background-color: #5CD1E5;
-        }
-
-        .burlywood {
-            background-color: BurlyWood;
-        }
-
-        .disabled {
-            background-color: #F5F5F5;
-        }
-
-        * {
-            user-select: none;
-        }
-    </style>
+    <!-- jQuery 3.4.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -115,26 +69,28 @@ function turnIn() {         // 대여된 노트북 리스트 출력'
                 <?php
 
                 if ($_POST['todo'] == "대여") {
-                    echo "$(this).toggleClass('blue');";
+                    echo "$(this).toggleClass('aquamarine');";
                 } else {
                     echo "$(this).toggleClass('burlywood');";
                 }
                 ?>
             });
-            $('#user').val('<?= $user ?>');
+            $('#user').val('<?= $GLOBALS['user'] ?>');
         });
     </script>
 </head>
 <body>
-    <form action="./query.php" method="post">
-        <input type="hidden" name="user" id="user">
-        <?php
-            if ($_POST['todo'] == '대여') {
-                lend();
-            } else {
-                turnIn();
-            }
-        ?>
-    </form>
+    <main>
+        <form action="./query.php" method="post">
+            <input type="hidden" name="user" id="user">
+            <?php
+                if ($_POST['todo'] == '대여') {
+                    lend();
+                } else {
+                    turnIn();
+                }
+            ?>
+        </form>
+    </main>
 </body>
 </html>
